@@ -31,7 +31,8 @@ def hide(window: ttk.Window):
 
 
 def show(window: ttk.Window):
-    #window.config(pos=pyautogui.position())
+    x, y = pyautogui.position()
+    window.geometry(f"+{x - window.winfo_width()}+{y}")
     window.deiconify()
 
 
