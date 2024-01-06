@@ -1,17 +1,39 @@
-import webview
+import gui
+import ttkbootstrap as ttk
+import threading
+from clipboard import Clipboard
+import pyautogui
+import keyboard
 
 
-def load_file_as_str(path: str) -> str:
-    with open(path, "r") as f:
-        content = f.read()
-    return content
+def main():
+    clipboard: Clipboard = Clipboard()
+
+    mouse_pos = pyautogui.position()
+    window = ttk.Window(
+        title="",
+        themename="darkly",
+        size=(250, 350),
+        resizable=(False, False),
+        position=mouse_pos,
+    )
+
+    app = gui.Select_Menu(window, clipboard, hide)  # passing by reference?
+    keyboard.add_hotkey("alt+c", show, args=(window,))
+    clipboard_listener = threading.Thread(target=clipboard.listen, args=(app.update_clipboard,))
+    clipboard_listener.start()
+    app.mainloop()
+    clipboard_listener.join()
 
 
-def load_css(w: webview.Window):  # close enough type checking
-    w.load_css(load_file_as_str("web/css/output.css"))
+def hide(window: ttk.Window):
+    window.withdraw()
+
+
+def show(window: ttk.Window):
+    #window.config(pos=pyautogui.position())
+    window.deiconify()
 
 
 if __name__ == "__main__":
-    window = webview.create_window(title="", html=load_file_as_str("web/index.html"), width=300, height=400,
-                                   resizable=False, text_select=True)
-    webview.start(load_css, window)
+    main()

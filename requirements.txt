@@ -13,3 +13,6 @@ pywebview==4.4.1
 QtPy==2.4.1
 shiboken2==5.15.2.1
 typing_extensions==4.9.0
+
+ttkbootstrap~=1.10.1
+pyperclip~=1.8.2
