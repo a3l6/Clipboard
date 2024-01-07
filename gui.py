@@ -6,7 +6,7 @@ from typing import Callable
 
 
 class Clipboard_Content_Button(ttk.Button):
-    def __init__(self, master, text, real_text, hide: Callable, window, *args, **kwargs):
+    def __init__(self, master, text: str, real_text: str, hide: Callable, window: ttk.Window, *args, **kwargs):
         super().__init__(master, padding=8, command=self._copy_to_clipboard, text=text, *args, **kwargs)
         self.text = text
         self.real_text = real_text
@@ -19,7 +19,7 @@ class Clipboard_Content_Button(ttk.Button):
 
 
 class Select_Menu(ttk.Frame):
-    def __init__(self, master, clipboard, hide: Callable):
+    def __init__(self, master: ttk.Window, clipboard, hide: Callable):
         super().__init__(master, padding=10)
         self.master = master
         self.hide = hide
