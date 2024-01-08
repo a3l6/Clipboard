@@ -2,9 +2,10 @@ import gui
 import ttkbootstrap as ttk
 import threading
 from clipboard import Clipboard
-import keyboard
+#import keyboard
 from controller import Controller
 import pynput.mouse as pynput
+from pynput import keyboard
 
 
 def main():
@@ -23,7 +24,10 @@ def main():
     controller.set_hide_func(hide)
 
     app = gui.Select_Menu(window, clipboard, hide)  # passing by reference?
-    keyboard.add_hotkey("alt+c", show, args=(window,))
+
+    hotkey = threading.Thread(target=controller.hotkey_listener)
+    hotkey.start()
+    controller.register_thread(hotkey)
 
     clipboard_listener = threading.Thread(target=clipboard.listen, args=(app.update_clipboard,))
     clipboard_listener.start()
