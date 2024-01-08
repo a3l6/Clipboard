@@ -17,6 +17,8 @@ sudo reboot
 ### Register Hotkey With Operating System
 See here for full details for Ubuntu: [link](https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en)
 
+## Testing
+Run tests with 
 
 ## Contributing
 I don't have a contributing guide. If you see an issue and want to fix it, make a PR. If not, message me on discord.
