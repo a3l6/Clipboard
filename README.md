@@ -1,8 +1,11 @@
 # Clipboard++
-This is a linux utility to implement clipboard history
+A linux utility app build to implement clipboard history
+## Dependencies
+- Python 3.10+ is required (Tested on 3.10.12)
+- Linux based operating system
+- Gnome (only for autostart)
 
 ## Getting Started
-
-
-## Notes
-Need python 3.10 because pycairo doesn't work on 3.11 or 3.12. See [here](https://github.com/pygobject/pycairo/issues/353).
+```bash
+// Install dependencies 
+```

@@ -1,5 +1,4 @@
 import ttkbootstrap as ttk
-from typing import Callable
 import threading
 from clipboard import Clipboard
 import pynput.mouse as pynput
