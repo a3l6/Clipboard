@@ -2,13 +2,12 @@ import gui
 import ttkbootstrap as ttk
 import threading
 from clipboard import Clipboard
-#import keyboard
 from controller import Controller
 import pynput.mouse as pynput
-from pynput import keyboard
 
 
 def main():
+    # Initialize everything
     clipboard: Clipboard = Clipboard(controller)
     controller.set_clipboard(clipboard)
 
@@ -21,9 +20,8 @@ def main():
         position=mouse_pos,
     )
     controller.set_window(window)
-    controller.set_hide_func(hide)
 
-    app = gui.Select_Menu(window, clipboard, hide)  # passing by reference?
+    app = gui.Select_Menu(window, clipboard, controller.hide)  # passing by reference?
 
     hotkey = threading.Thread(target=controller.hotkey_listener)
     hotkey.start()
@@ -34,19 +32,8 @@ def main():
     controller.register_thread(clipboard_listener)
 
     window.protocol("WM_DELETE_WINDOW", controller.shutdown)
+
     app.mainloop()
-
-
-def hide(window: ttk.Window):
-    controller.visible = False
-    window.withdraw()
-
-
-def show(window: ttk.Window):
-    controller.visible = True
-    x, y = mouse.position
-    window.geometry(f"+{x - window.winfo_width()}+{y}")
-    window.deiconify()
 
 
 if __name__ == "__main__":

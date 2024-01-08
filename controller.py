@@ -11,7 +11,6 @@ class Controller:       # This will control all threads to shut them off
         self._on = True
         self.visible = False
         self.window: ttk.Window | None = None
-        self.hide_func: Callable | None = None
         self._threads: list[threading.Thread] = []
         self.clipboard: Clipboard | None = None
 
@@ -24,12 +23,16 @@ class Controller:       # This will control all threads to shut them off
     def set_clipboard(self, clipboard: Clipboard):
         self.clipboard = clipboard
 
-    def set_hide_func(self, func: Callable):
-        self.hide_func = func
-
-    def hide(self, x, y, Button, pressed):
+    def hide(self, x=None, y=None, Button=None, pressed=None, force=False):
+        print(f"{self._on=}")
         if not self._on: raise SystemExit
-        if self.window.focus_get() is None: self.hide_func(self.window)
+        if self.window.focus_get() is None and not force:
+            print("hiding")
+            self.visible = False
+            self.window.withdraw()
+        elif force:
+            self.visible = False
+            self.window.withdraw()
 
     def show(self):
         if not self._on: raise SystemExit

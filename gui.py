@@ -15,7 +15,7 @@ class Clipboard_Content_Button(ttk.Button):
 
     def _copy_to_clipboard(self):
         pyperclip.copy(self.real_text)
-        self.hide(self.window)
+        self.hide(force=True)
 
 
 class Select_Menu(ttk.Frame):
@@ -45,7 +45,7 @@ class Select_Menu(ttk.Frame):
                                                hide=self.hide, window=self.master)
                 btn.pack(pady=10)
                 self.btns.append(btn)
-        self.hide(window=master)
+        hide(force=True)
 
     def update_clipboard(self):
         for btn in self.btns:
