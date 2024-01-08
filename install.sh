@@ -2,11 +2,11 @@
 
 git clone https://github.com/a3l6/Clipboard.git
 cd Clipboard
-python3.10 -m pip install virtualenv
-python3.10 -m virtualenv .venv
-pip install -r requirements.txt
+python3 -m pip install virtualenv
+python3 -m virtualenv .venv
+.venv/bin/python3 -m pip install -r requirements.txt
 
-script_dir=$(dirname $0)
+script_dir=$(realpath $(dirname $0))
 
 mkdir ~/.config/autostart
 
@@ -16,7 +16,7 @@ Encoding=UTF-8
 Name=Clipboard++
 Comment=Clipboard++
 Icon=gnome-info
-Exec=$script_dir/Clipboard/.venv/bin/python3 $script_dir/Clipboard/main.py
+Exec=$script_dir/.venv/bin/python3 $script_dir/main.py
 Terminal=false
 Type=Application
 Categories=
